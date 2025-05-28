@@ -29,6 +29,12 @@ header {
 
 }
 
+@media (max-width: 768px) {
+    header {
+        width: 40rem;
+    }
+}
+
 .header__logo {
     height: inherit;
     width: 5rem;
@@ -71,8 +77,26 @@ header {
     justify-content: center;
 }
 
+@media (max-width: 768px) {
+    .heading__body {
+        display: block;
+        margin: 0 auto;
+
+    }
+
+}
+
 .why__image {
     width: 50%
+}
+
+@media (max-width: 768px) {
+    .why__image {
+        width: 100%;
+
+        margin: auto auto;
+    }
+
 }
 
 .why__left{
@@ -121,12 +145,32 @@ button:hover {
     width: 50%;
 }
 
+@media (max-width: 768px) {
+    .services {
+        padding: 5rem 1rem;
+    }
+    .services__left {
+        float: left;
+        width: auto;
+    }
+.services__right {
+        float: right;
+        margin-left: auto;
+        width: auto;
+    }
+    .services__body {
+        display: block;
+        justify-content: space-between;
+    }
+}
 
 .services__body {
     display: flex;
     flex-direction: row;
 
 }
+
+
 
 .services__list {
     display: flex;
@@ -144,6 +188,8 @@ button:hover {
     color: #F5F9E4;
 }
 
+
+
 footer {
     background-color: #32545C;
     padding: 2rem;
@@ -151,6 +197,12 @@ footer {
     display: flex;
     flex-direction: row;
 
+}
+
+@media (max-width: 768px) {
+    footer {
+        width: 40rem;
+    }
 }
 
 .footer__left {
@@ -189,6 +241,27 @@ footer {
     flex-direction: row;
 }
 
+@media (max-width: 768px) {
+    .image__lefthalf {
+    text-align: auto;
+    height: 15rem;
+    margin: auto 4rem auto 4rem;
+
+}
+
+.image__righthalf {
+    height: 15rem;
+    text-align: left;
+    margin: auto 4rem auto 4rem;
+}
+
+.about {
+    display: block;
+
+
+}
+
+
 .services__form {
     display: flex;
     justify-content: center;
@@ -206,6 +279,23 @@ footer {
     display: flex;
     flex-direction: row;
     margin: 0 5rem;
+
+}
+
+@media (max-width: 768px) {
+    .services__plans{
+        display: flex;
+        flex-direction: row;
+        margin: 0 0rem;
+
+    }
+    .plan__heading {
+        margin: 1rem auto;
+        display: grid;
+        place-items: center;
+        color: #1B6B7F;
+        font-size: 21px;
+}
 
 }
 
@@ -256,8 +346,16 @@ footer {
     width: 10rem;
 }
 
-.placeholder {
-    height: 50rem;
+@media (max-width: 768px) {
+    .social__logo {
+        width: 5rem;
+        margin: 1rem;
+
+    }
+
 }
 
 
+.placeholder {
+    height: 50rem;
+}
