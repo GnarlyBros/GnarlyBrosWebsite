@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+    <meta name="author" content="Kyrillos"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/styles.css"/>
+    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
+</head>
+<body>
+    <header>
+            <div>
+                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
+            </div>
+            <ul class="header__lists">
+                <li><a href="/" class="link">Home</a></li>
+                <li><a href="/about/" class="link">About</a></li>
+                <li><a href="/services/" class="link">Services</a></li>
+                <li><a href="/booknow/" class="link">Book Now</a></li>
+                <li><a href="/socials/" class="link">Socials</a></li>
+            </ul>
+
+    </header>
+    <main>
+        <h1 class="heading">SERVICES</h1>
+        <form action="/services" method="POST" class="services__form">
+            <label for="models" class="form__label">Choose your car model: </label>
+            <select name="model" id="models" onchange="this.form.submit()">
+                {% if selected_model == "Sedan"%}
+                <option value="Sedan" selected>Sedan</option>
+                {% else %}
+                <option value="Sedan">Sedan</option>
+                {% endif %}
+                {% if selected_model == "SUV"%}
+                <option value="SUV" selected>SUV</option>
+                {% else %}
+                <option value="SUV">SUV</option>
+                {% endif %}
+                {% if selected_model == "LargeSUV"%}
+                <option value="LargeSUV" selected>Large SUV (3rd Row)</option>
+                {% else %}
+                <option value="LargeSUV">Large SUV (3rd Row)</option>
+                {% endif %}
+                {% if selected_model == "Truck"%}
+                <option value="Truck" selected>Truck</option>
+                {% else %}
+                <option value="Truck">Truck</option>
+                {% endif %}
+                {% if selected_model == "Large Truck"%}
+                <option value="Large Truck" selected>Large Truck (With oversized wheels)</option>
+                {% else %}
+                <option value="Large Truck">Large Truck (With oversized wheels)</option>
+                {% endif %}
+            </select>
+        </form>
+        <div class="services__plans">
+            <div class="services__plan" id="interior">
+                <h2 class="plan__heading">INTERIOR</h2>
+                <ul class="services__list">
+                    <li>Complete Interior Detailing</li>
+                    <li>Stain Removal</li>
+                    <li>Steam Cleaning</li>
+                    <li>Deep Vacuuming</li>
+                </ul>
+                <h1 class="services__price">${{ interior_price }}</h1>
+            </div>
+            <div class="services__plan" id="exterior">
+                <h2 class="plan__heading">EXTERIOR</h2>
+                <ul class="services__list">
+                    <li>Foam Gun & Pressure Wash</li>
+                    <li>Tire Shine</li>
+                    <li>Wheel Cleaning</li>
+                </ul>
+                <h1 class="services__price">${{ exterior_price }}</h1>
+            </div>
+            <div class="services__plan" id="both">
+                <h2 class="plan__heading">BOTH</h2>
+                <ul class="services__list">
+                    <li>Interior Detailing Package</li>
+                    <li>Exterior Detailing Package</li>
+                    <li>Special Offer - ${{ (interior_price + exterior_price) - both }} markdown!</li>
+                </ul>
+                <h1 class="services__price">${{ both }}</h1>
+            </div>
+        </div>
+        <p id="warning">*Vehicles in Severe condition may be subject to a $50 up-charge.</p>
+    </main>
+    <footer>
+        <div class="footer__left">
+            <ul class="footer__list">
+                <li>Made by Kyrillos Abdelshaheed</li>
+                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
+                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
+                <li>757-375-8368</li>
+
+            </ul>
+        </div>
+        <div class="footer__right">
+            <ul class="footer__list">
+                <li><a href="/" class="footer__link">Home</a></li>
+                <li><a href="/about/" class="footer__link">About</a></li>
+                <li><a href="/services/" class="footer__link">Services</a></li>
+                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
+                <li><a href="/socials/" class="footer__link">Socials</a></li>
+
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
