@@ -5,7 +5,7 @@ import Prices
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
-load_dotevn()
+load_dotenv()
 
 
 def create_app():
