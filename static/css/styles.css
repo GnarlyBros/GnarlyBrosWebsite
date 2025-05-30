@@ -248,6 +248,7 @@ footer {
     margin: auto 4rem auto 4rem;
 
 }
+}
 
 .image__righthalf {
     height: 15rem;
@@ -255,11 +256,15 @@ footer {
     margin: auto 4rem auto 4rem;
 }
 
-.about {
+
+@media (max-width: 768px) {
+    .about {
     display: block;
 
 
 }
+}
+
 
 
 .services__form {
@@ -278,24 +283,7 @@ footer {
 .services__plans{
     display: flex;
     flex-direction: row;
-    margin: 0 5rem;
-
-}
-
-@media (max-width: 768px) {
-    .services__plans{
-        display: flex;
-        flex-direction: row;
-        margin: 0 0rem;
-
-    }
-    .plan__heading {
-        margin: 1rem auto;
-        display: grid;
-        place-items: center;
-        color: #1B6B7F;
-        font-size: 21px;
-}
+    justify-self: center;
 
 }
 
@@ -303,8 +291,8 @@ footer {
     position: relative;
     background-color: #EAEFD0;
     border-radius: 20px;
-    margin: 0rem 1rem 0rem 0rem;
-    width: 33%;
+    margin: 0 1rem;
+    width: 15rem;
     height: auto;
     padding: .75rem;
     padding-bottom: 3rem;
@@ -321,6 +309,28 @@ footer {
     place-items: center;
     color: #1B6B7F
 }
+
+@media (max-width: 768px) {
+    .services__plans{
+        display: flex;
+        flex-direction: row;
+        justify-self: center;
+
+    }
+    .plan__heading {
+        margin: 1rem auto;
+        display: grid;
+        place-items: center;
+        color: #1B6B7F;
+        font-size: 21px;
+    }
+    .services__plan {
+        width: 7rem;
+        padding: 0;
+        padding-bottom: 3rem;
+    }
+}
+
 
 .services__price {
     position: absolute;
