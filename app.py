@@ -106,7 +106,7 @@ def create_app():
     def review():
         entry_id = request.args.get("entry_id")
         entry = app.db.entries.find_one({"_id": ObjectId(entry_id)})
-
+        print(entry['package'])
         return render_template("review.html",
                            first_name=entry['first name'],
                            last_name=entry['last name'],

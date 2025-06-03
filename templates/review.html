@@ -44,7 +44,7 @@ We look forward to serving you!<br><br>
                 </div>
                 <div class="review__package">
                     <span class="review__left">Package:</span>
-                    <span class="review__right">{% if package == Both_package %} Both {% elif package == interior_package %} Interior {% else %} Exterior {% endif %}</span>
+                    <span class="review__right"> {% if package == "Exterior_package" %} Exterior {% elif package == "Interior_package" %} Interior {% elif package == "Both_package" %} Both {% endif %}</span>
                 </div>
                 <div class="review__price">
                     <span class="review__left">Price:</span>
