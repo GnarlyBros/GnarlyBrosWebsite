@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Now</title>
+    <meta name="author" content="Kyrillos"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../static/css/styles.css"/>
+    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
+</head>
+<body>
+    <header>
+            <div>
+                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
+            </div>
+            <ul class="header__lists">
+                <li><a href="/" class="link">Home</a></li>
+                <li><a href="/about/" class="link">About</a></li>
+                <li><a href="/services/" class="link">Services</a></li>
+                <li><a href="/booknow/" class="link">Book Now</a></li>
+                <li><a href="/socials/" class="link">Socials</a></li>
+            </ul>
+
+    </header>
+    <main>
+        <h1 class="heading">Review your appointment</h1>
+        <p class="review__thankyou">Hi {{ first_name }}  {{ last_name }},<br><br>
+
+Thank you for choosing Gnarly Bros Detailing! We'll be sending you an RSVP shortly—please be sure to accept the invitation so we know you're a serious inquiry. <br><br>
+
+Our team will arrive at {{ address }}, {{ city }}, {{ zip }} at {{ time }}:00 on {{ day }}. Please be ready to meet us upon arrival. Appointments can take up to three hours, so we recommend planning your schedule accordingly.<br><br>
+
+Once the service is complete, we invite you to inspect the vehicle to ensure everything meets your expectations—we take great pride in client satisfaction.<br><br>
+
+If you have any questions before or during your appointment, don’t hesitate to reach out at 757-375-8368.<br><br>
+
+We look forward to serving you!<br><br>
+– The Gnarly Bros Detailing Team</p>
+        <div class="review__info">
+            <div class="review__firsthalf">
+                <div class="review__model">
+                    <span class="review__left">Car Model:</span>
+                    <span class="review__right">{{ model }}</span>
+                </div>
+                <div class="review__package">
+                    <span class="review__left">Package:</span>
+                    <span class="review__right">{% if package == both_package %} Both {% elif package == interior_package %} Interior {% else %} Exterior {% endif %}</span>
+                </div>
+                <div class="review__price">
+                    <span class="review__left">Price:</span>
+                    <span class="review__right">${{ price }}</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <div class="footer__left">
+            <ul class="footer__list">
+                <li>Made by Kyrillos Abdelshaheed</li>
+                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
+                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
+                <li>757-375-8368</li>
+
+            </ul>
+        </div>
+        <div class="footer__right">
+            <ul class="footer__list">
+                <li><a href="/" class="footer__link">Home</a></li>
+                <li><a href="/about/" class="footer__link">About</a></li>
+                <li><a href="/services/" class="footer__link">Services</a></li>
+                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
+                <li><a href="/socials/" class="footer__link">Socials</a></li>
+
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
