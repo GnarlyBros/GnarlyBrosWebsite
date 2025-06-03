@@ -23,9 +23,81 @@
 
     </header>
     <main>
-        <h1 class="heading">Sorry, Our book now services are currently down...</h1>
+        <form action="/booknow/" method="POST" class="booknow__form">
+            <h1 class="heading">Contact Info</h1>
+            <div class="booknow__info">
+                <div class="booknow__names">
+                    <div class="booknow__first">
+                        <label for="first" class="form__label" >First Name:</label>
+                        <input type="text" id="first" name="first" required>
+                    </div>
+                    <div class="booknow__last">
+                        <label for="last" class="form__label" >Last Name:</label>
+                        <input type="text" id="last" name="last" required>
+                    </div>
+                </div>
+                <div class="booknow__contact">
+                    <div class="booknow__email">
+                        <label for="email" class="form__label" >Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="booknow__number">
+                        <label for="number" class="form__label" >Phone Number:</label>
+                        <input type="tel" id="number" name="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                    </div>
+                </div>
+            </div>
 
-        <div class="placeholder"></div>
+            <h1 class="heading">Where would you like us to meet you?</h1>
+            <div class="booknow__address">
+                <div class="booknow__street">
+                    <label for="street" class="form__label">Street Address:</label>
+                    <input type="text" id="street" name="street" size="50" required>
+                </div>
+                <div class="booknow__apt">
+                    <label for="apt" class="form__label">Apt, Suite, Ect:</label>
+                    <input type="text" id="apt" name="apt" size="50">
+                </div>
+                <div class="booknow__city">
+                    <label for="city" class="form__label">City:</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="booknow__zip">
+                    <label for="zip" class="form__label">Zip:</label>
+                    <input type="text" id="zip" name="zip" required>
+                </div>
+            </div>
+
+            <h1 class="heading">Choose a Service</h1>
+            <div class="booknow__serviceselection">
+                    <label for="models" class="form__label">Choose your car model: </label>
+                    <select name="model" id="models">
+                    <option value="Sedan" selected>Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="LargeSUV">Large SUV (3rd Row)</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Large Truck">Large Truck (With oversized wheels)</option>
+                    </select>
+                </div>
+            <div class="booknow__packageselection">
+                <label for="package" class="form__label">Choose a package: </label>
+                <select name="package" id="package">
+                    <option value="Interior_package" selected>Interior</option>
+                    <option value="Exterior_package">Exterior</option>
+                    <option value="Both_package">Both</option>
+                </select>
+            </div>
+            <h1 class="heading">Choose a date</h1>
+            <div class="booknow__date">
+                <div class="booknow__day">
+                    <label for="day" class="form__label">Day:</label>
+                    <input type="date" id="day" name="day" required>
+                </div>
+            </div>
+            <h1 class="heading">Tell us any concerns/ aftermarket work you have had with your vehicle</h1>
+            <textarea rows="6" cols="50" class="booknow__textarea" name="concerns"></textarea>
+            <button type="submit">Book</button>
+        </form>
     </main>
     <footer>
         <div class="footer__left">

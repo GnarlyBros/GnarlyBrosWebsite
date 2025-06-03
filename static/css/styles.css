@@ -369,3 +369,169 @@ footer {
 .placeholder {
     height: 50rem;
 }
+
+
+.booknow__names {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0;
+    padding: 1rem;
+    justify-self: center;
+}
+
+.booknow__last {
+    margin-left: 7rem;
+}
+
+.booknow__contact {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    justify-self: center;
+    margin: 2rem 0;
+}
+
+.booknow__number {
+    margin-left: 5rem;
+}
+
+.booknow__email {
+    margin-left: 2.5rem;
+}
+
+
+@media (max-width: 768px) {
+    .booknow__names {
+        display: flex;
+        flex-direction: column;
+
+    }
+    .booknow__last {
+        margin-left: 0rem;
+        margin-top: 2rem;
+    }
+    .booknow__contact {
+        display: flex;
+        flex-direction: column;
+        padding: 0rem;
+        justify-self: center;
+    }
+    .booknow__email {
+        margin-left: 3.5rem;
+        margin-bottom: 2rem;
+    }
+    .booknow__number {
+        margin-left: 0rem;
+    }
+}
+
+.booknow__address {
+    margin: 2rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.booknow__street {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.booknow__apt {
+    text-align: center;
+    margin-left: 0.2rem;
+    margin-bottom: 2rem;
+}
+.booknow__city {
+    text-align: center;
+    margin-right: 6.5rem;
+    margin-bottom: 2rem;
+}
+.booknow__zip {
+    text-align: center;
+    margin-right: 6.3rem;
+    margin-bottom: 2rem;
+}
+
+.booknow__serviceselection {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.booknow__packageselection {
+    text-align: center;
+    margin-right: 7.5rem;
+}
+
+@media (max-width: 768px) {
+    .booknow__serviceselection {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .booknow__packageselection {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-right: 0rem;
+    }
+}
+
+.booknow__day {
+    margin: 2rem 0;
+    display: flex;
+    justify-self: center;
+}
+
+.booknow__time {
+    margin: 2rem 2.5rem 2rem 0;
+    display: flex;
+    justify-self: center;
+}
+
+.booknow__textarea {
+    display: flex;
+    justify-self: center;
+    margin-bottom: 5rem;
+}
+
+.review__thankyou {
+    padding: 2rem 5rem;
+    color: #EAEFD0
+}
+
+.review__info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.review__firsthalf {
+    background-color: #EAEFD0;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    height: 100%
+}
+
+.review__model {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review__package {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.review__price {
+    display: flex;
+    justify-content: space-between;
+
+}
