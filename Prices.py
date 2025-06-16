@@ -8,25 +8,25 @@ class Prices:
 
     def get_price(self):
         if self.model == "Sedan":
-            self.interior = 80
-            self.exterior = 40
-            self.both = 100
+            self.interior = 150
+            self.exterior = 100
+            self.both = 200
         elif self.model == "SUV":
-            self.interior = 90
-            self.exterior = 50
-            self.both = 120
+            self.interior = 170
+            self.exterior = 120
+            self.both = 240
         elif self.model == "LargeSUV":
-            self.interior = 120
-            self.exterior = 60
-            self.both = 150
+            self.interior = 200
+            self.exterior = 150
+            self.both = 300
         elif self.model == "Truck":
-            self.interior = 90
-            self.exterior = 60
-            self.both = 130
+            self.interior = 170
+            self.exterior = 140
+            self.both = 250
         else:
-            self.interior = 90
-            self.exterior = 70
-            self.both = 140
+            self.interior = 170
+            self.exterior = 150
+            self.both = 270
 
         return self.interior, self.exterior, self.both
 
