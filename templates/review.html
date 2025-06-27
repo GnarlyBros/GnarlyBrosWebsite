@@ -26,7 +26,7 @@
         <h1 class="heading">Review your appointment</h1>
         <p class="review__thankyou">Hi {{ first_name }}  {{ last_name }},<br><br>
 
-Thank you for choosing Gnarly Bros Detailing! We'll be sending you an RSVP shortly—please be sure to accept the invitation so we know you're a serious inquiry. <br><br>
+            Thank you for choosing Gnarly Bros Detailing! We'll be sending you an RSVP shortly or do so <a href={{rsvp}}>HERE</a>—please be sure to accept the invitation so we know you're a serious inquiry. <br><br>
 
 Our team will arrive at {{ address }}, {{ city }}, {{ zip }} at {{ time }}:00 on {{ day }}. Please be ready to meet us upon arrival. Appointments can take up to three hours, so we recommend planning your schedule accordingly.<br><br>
 
@@ -46,6 +46,16 @@ We look forward to serving you!<br><br>
                     <span class="review__left">Package:</span>
                     <span class="review__right"> {% if package == "Exterior_package" %} Exterior {% elif package == "Interior_package" %} Interior {% elif package == "Both_package" %} Both {% endif %}</span>
                 </div>
+                <div class="review__packageprice">
+                    <span class="review__left">Package price:</span>
+                    <span class="review__right">${{ package_price }}</span>
+                </div>
+                {% for i in range(addons|length) %}
+                <div class="review__addons">
+                    <span class="review__left">{{addons[i] | replace("_", " ")}}:</span>
+                    <span class="review__right">${{addon_prices[i]}}</span>
+                </div>
+                {% endfor %}
                 <div class="review__price">
                     <span class="review__left">Price:</span>
                     <span class="review__right">${{ price }}</span>

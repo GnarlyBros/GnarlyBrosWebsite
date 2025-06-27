@@ -26,7 +26,7 @@ header {
     padding: 5px 10px;
     justify-content: space-between;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-
+    z-index: 1000;
 }
 
 @media (max-width: 768px) {
@@ -203,6 +203,10 @@ footer {
     footer {
         width: 40rem;
     }
+    ul {
+        list-style-type: none;
+        padding-inline-start: 0.5rem;
+    }
 }
 
 .footer__left {
@@ -284,7 +288,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-self: center;
-
+    margin-bottom: 2.5rem;
 }
 
 .services__plan {
@@ -533,5 +537,27 @@ footer {
 .review__price {
     display: flex;
     justify-content: space-between;
+    border-top: .1rem solid #000;
+    margin: 1rem 0;
+    padding-top: 1rem;
+}
 
+#addons {
+    margin-top: 5rem;
+}
+
+.booknow__addonselection {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.review__packageprice {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review__addons {
+    display: flex;
+    justify-content: space-between;
 }

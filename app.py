@@ -41,17 +41,17 @@ def create_app():
 
     @app.route("/services/", methods=["GET", "POST"])
     def services():
-        interior_price, exterior_price, both = 80,40,100
+        interior_price, exterior_price, both, claybar, ceramic, polish, carpet = 80,40,100,40,40,120,80
         selected_model = 'Sedan'
         if request.method == "POST":
             selected_model = request.form.get('model')
             prices = Prices.Prices(selected_model)
-            interior_price, exterior_price, both = prices.get_price()
-        return render_template("services.html", selected_model=selected_model,interior_price=interior_price, exterior_price=exterior_price, both=both)
+            interior_price, exterior_price, both, claybar, ceramic, polish, carpet = prices.get_price()
+        return render_template("services.html", selected_model=selected_model,interior_price=interior_price, exterior_price=exterior_price, both=both, ceramic=ceramic, claybar=claybar, polish=polish, carpet=carpet)
 
     @app.route("/booknow/", methods=["GET", "POST"])
     def booknow():
-        price = 0
+        package_price = 0
         if request.method == "POST":
             first_name = request.form.get('first')
             last_name = request.form.get('last')
@@ -66,13 +66,24 @@ def create_app():
             day = request.form.get('day')
             concerns = request.form.get('concerns')
             prices = Prices.Prices(model)
-            interior_price, exterior_price, both = prices.get_price()
+            interior_price, exterior_price, both, claybar, ceramic, polish, carpet = prices.get_price()
             if package == 'Exterior_package':
-                price = exterior_price
+                package_price = exterior_price
             if package == 'Interior_package':
-                price = interior_price
+                package_price = interior_price
             if package == 'Both_package':
-                price = both
+                package_price = both
+            addons = request.form.getlist('addons[]')
+            addon_prices = []
+            for addon in addons:
+                if (addon == "Clay_Bar"):
+                    addon_prices.append(claybar)
+                elif (addon == "Ceramic_Spray"):
+                    addon_prices.append(ceramic)
+                elif (addon == "Polish"):
+                    addon_prices.append(polish)
+                else:
+                    addon_prices.append(carpet)
             entry = {
                 "first name": first_name,
                 "last name": last_name,
@@ -86,7 +97,10 @@ def create_app():
                 "package": package,
                 "day": day,
                 "concerns": concerns,
-                "price": price
+                "Package price": package_price,
+                "addon": addons,
+                "addon price": addon_prices,
+                "price": package_price + sum(addon_prices)
             }
             result = app.db.entries.insert_one(entry)
             entry_id = str(result.inserted_id)
@@ -112,13 +126,14 @@ def create_app():
                 "$set": {"day": "invalid"}
             }
             app.db.entries.update_one({"_id": ObjectId(entry_id)}, update_query)
+            day = "invalid"
         if request.method == "POST":
             time = request.form['time']
             app.db.entries.update_one({"_id": ObjectId(entry_id)}, {"$set": {"time": time}})
             event ={
                 "summary": f"{entry['first name']}'s Mobile Detailing Appointment",
                 "location": f"{entry['address']}, {entry['city']}, {entry['zip']}",
-                "description": f"Model: {entry['model']}\n Package: {entry['package']}\nPrice: {entry['price']}\nConcerns: {entry['concerns']}",
+                "description": f"Model: {entry['model']}\n Package: {entry['package']}\nPrice: {entry['price']}\nConcerns: {entry['concerns']}\nContact:{entry['number']}",
                 "start": {
                     "dateTime": f"{entry['day']}T{'08:00:00' if time == '8' else '11:00:00' if time == '11' else '14:00:00' if time == '2' else '17:00:00'}",
                     "timeZone": "America/New_York"
@@ -137,8 +152,9 @@ def create_app():
                 "guestsCanModify": True,
                 "guestsCanSeeOtherGuests": True
             }
+            created_event = None
             try:
-                calendar_service.events().insert(calendarId=calendar_id, body=event, sendUpdates='all').execute()
+                created_event = calendar_service.events().insert(calendarId=calendar_id, body=event, sendUpdates='all').execute()
                 status = 'Good'
             except:
                 status = 'bad'
@@ -152,13 +168,26 @@ def create_app():
                                 <li><strong>🕒 Time:</strong> {entry['day']} at {'08:00 AM' if time == '8' else '11:00 AM' if time == '11' else '2:00 PM' if time == '2' else '5:00 PM'}</li>
                                 <li><strong>🚗 Vehicle:</strong> {entry['model']}</li>
                                 <li><strong>🧽 Package:</strong> {entry['package'].replace('_', ' ')}</li>
-                                <li><strong>💲 Price:</strong> ${entry['price']}</li>
+                                <li><strong>🪙 Package Price:</strong> ${entry['Package price']}</li>
                                 <li><strong>📝 Concerns:</strong> {entry['concerns'] or 'None'}</li>
+                                <li><strong>✨ Add-ons:</strong>
+                                    <ul>
+                                        {''.join(f'<li>{a.replace("_"," ")} - ${p}</li>' for a, p in zip(entry['addon'], entry['addon price'])) if entry['addon'] else '<li>None</li>'}
+                                    </ul>
+                                </li>
+                                <li><strong>💲 Price:</strong> ${entry['price']}</li>
                             </ul>
+                            <p><strong>✅ Confirm your appointment:</strong></p>
+                            <p>
+                                <a href="{created_event.get("htmlLink")}" 
+                                style="display:inline-block;padding:10px 20px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;">
+                                RSVP & Add to Calendar
+                                </a>
+                            </p>
                             <p>If you have any questions or need to reschedule, just reply to this email.</p>
                             <p>Looking forward to making your ride shine!<br>
                             – <strong>Gnarly Bros Detailing</strong><br>
-                            <a href="https://gnarlybrosdetailing.com">gnarlybrosdetailing.com</a></p>
+                            <a href="https://gnarlybrosdetailing.com">gnarlybrosdetailing.com</a><br>
                         </body>
                     </html>
                 """
@@ -171,8 +200,14 @@ Thanks for booking with Gnarly Bros Detailing! Here's your appointment summary:
 🕒 Time: {entry['day']} at {'08:00 AM' if time == '8' else '11:00 AM' if time == '11' else '2:00 PM' if time == '2' else '5:00 PM'}
 🚗 Vehicle: {entry['model']}
 🧽 Package: {entry['package'].replace('_', ' ')}
-💲 Price: ${entry['price']}
+🪙 Package Price: ${entry['Package price']}
 📝 Concerns: {entry['concerns'] or 'None'}
+✨ Add-ons:
+{chr(10).join(f'- {a.replace("_"," ")}: ${p}' for a, p in zip(entry['addon'], entry['addon price'])) if entry['addon'] else '- None'}
+💲 Price: ${entry['price']}
+
+✅ RSVP and add to your calendar:
+{created_event.get("htmlLink")}
 
 If you have any questions or need to reschedule, feel free to reply to this email.
 
@@ -195,13 +230,14 @@ https://gnarlybrosdetailing.com
                 server.send_message(msg, from_addr=msg["from"], to_addrs=email_list)
                 print("emails send")
 
-            return redirect(url_for("review", entry_id=entry_id))
+            return redirect(url_for("review", entry_id=entry_id, rsvp=created_event.get("htmlLink")))
 
-        return render_template("schedule.html", times=times, entry_id=entry_id)
+        return render_template("schedule.html", times=times, entry_id=entry_id, day=day)
 
     @app.route("/review/", methods=["GET", "POST"])
     def review():
         entry_id = request.args.get("entry_id")
+        rsvp = request.args.get("rsvp")
         entry = app.db.entries.find_one({"_id": ObjectId(entry_id)})
         print(entry['package'])
 
@@ -219,7 +255,11 @@ https://gnarlybrosdetailing.com
                            concerns=entry['concerns'],
                            day=entry['day'],
                            price=entry['price'],
-                           time=entry.get('time'))
+                           time=entry.get('time'),
+                           package_price=entry['Package price'],
+                           addons=entry['addon'],
+                           addon_prices=entry['addon price'],
+                           rsvp=rsvp)
 
     @app.route("/socials/")
     def socials():
