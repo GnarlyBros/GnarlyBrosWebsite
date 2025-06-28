@@ -41,7 +41,7 @@ def create_app():
 
     @app.route("/services/", methods=["GET", "POST"])
     def services():
-        interior_price, exterior_price, both, claybar, ceramic, polish, carpet = 80,40,100,40,40,120,80
+        interior_price, exterior_price, both, claybar, ceramic, polish, carpet = 150,100,200,40,40,120,80
         selected_model = 'Sedan'
         if request.method == "POST":
             selected_model = request.form.get('model')
