@@ -94,7 +94,7 @@ def create_app():
                 "city": city,
                 "zip": zip,
                 "model": model,
-                "package": package,
+                "package": "Detail",
                 "day": day,
                 "concerns": concerns,
                 "Package price": package_price,
@@ -167,7 +167,7 @@ def create_app():
                                 <li><strong>📍 Address:</strong> {entry['address']}, {entry['city']}, {entry['zip']}</li>
                                 <li><strong>🕒 Time:</strong> {entry['day']} at {'08:00 AM' if time == '8' else '11:00 AM' if time == '11' else '2:00 PM' if time == '2' else '5:00 PM'}</li>
                                 <li><strong>🚗 Vehicle:</strong> {entry['model']}</li>
-                                <li><strong>🧽 Package:</strong> {entry['package'].replace('_', ' ')}</li>
+                                <li><strong>🧽 Package:</strong> Detail</li>
                                 <li><strong>🪙 Package Price:</strong> ${entry['Package price']}</li>
                                 <li><strong>📝 Concerns:</strong> {entry['concerns'] or 'None'}</li>
                                 <li><strong>✨ Add-ons:</strong>
