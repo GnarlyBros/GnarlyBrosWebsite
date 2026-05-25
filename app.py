@@ -94,7 +94,7 @@ def create_app():
                 "city": city,
                 "zip": zip,
                 "model": model,
-                "package": "Detail",
+                "package": package,
                 "day": day,
                 "concerns": concerns,
                 "Package price": package_price,
