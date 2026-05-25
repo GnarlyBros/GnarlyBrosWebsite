@@ -55,36 +55,18 @@
             </select>
         </form>
         <div class="services__plans">
-            <div class="services__plan" id="interior">
-                <h2 class="plan__heading">INTERIOR</h2>
+            <div class="services__plan" id="both">
+                <h2 class="plan__heading">DETAIL</h2>
                 <ul class="services__list">
-                    <li>Complete Interior Detailing</li>
-                    <li>Stain Removal</li>
                     <li>Steam Cleaning</li>
                     <li>Deep Vacuuming</li>
-                </ul>
-                <h1 class="services__price">${{ interior_price }}</h1>
-            </div>
-            <div class="services__plan" id="exterior">
-                <h2 class="plan__heading">EXTERIOR</h2>
-                <ul class="services__list">
                     <li>Foam Gun & Pressure Wash</li>
                     <li>Tire Shine</li>
                     <li>Wheel Cleaning</li>
                 </ul>
-                <h1 class="services__price">${{ exterior_price }}</h1>
-            </div>
-            <div class="services__plan" id="both">
-                <h2 class="plan__heading">BOTH</h2>
-                <ul class="services__list">
-                    <li>Interior Detailing Package</li>
-                    <li>Exterior Detailing Package</li>
-                    <li>Special Offer - ${{ (interior_price + exterior_price) - both }} markdown!</li>
-                </ul>
                 <h1 class="services__price">${{ both }}</h1>
             </div>
         </div>
-
         <h1 class="heading" id="addons">Add-Ons</h1>
         <div class="services__plans">
             <div class="services__plan">
