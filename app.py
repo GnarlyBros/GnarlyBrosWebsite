@@ -22,11 +22,15 @@ load_dotenv()
 # ─────────────────────────────────────────────────────────────
 BUSINESS = {
     "name": "Gnarly Bros. Detailing",
-    "phone": "757-375-8368",
+    "phone": "757-945-0831",
     "email": "gnarlybrosdetailing@gmail.com",
     "developer": "Kyrillos Abdelshaheed",
     "website": "https://gnarlybrosdetailing.com",
 }
+
+INTERNAL_NOTIFICATION_EMAILS = [
+    "jason.g.cooney@gmail.com",
+]
 
 NAV_LINKS = [
     {"endpoint": "home", "label": "Home"},
@@ -182,6 +186,7 @@ def create_calendar_event(calendar_service: Optional[Any], entry: Dict[str, Any]
             {"email": entry["email"]},
             {"email": BUSINESS["email"]},
             {"email": "kyrillosabdelshaheed@gmail.com"},
+            *({"email": email} for email in INTERNAL_NOTIFICATION_EMAILS),
         ],
         "colorId": "5",
         "guestsCanInviteOthers": True,
@@ -276,7 +281,7 @@ def send_confirmation_email(entry: Dict[str, Any], time_value: str, rsvp_link: s
         return False
 
     subject, plain_text, html = build_confirmation_email(entry, time_value, rsvp_link)
-    email_list = [sender_email, entry["email"]]
+    email_list = list(dict.fromkeys([sender_email, entry["email"], *INTERNAL_NOTIFICATION_EMAILS]))
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
