@@ -1,89 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Now</title>
-    <meta name="author" content="Kyrillos"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../static/css/styles.css"/>
-    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
-</head>
-<body>
-    <header>
-            <div>
-                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
-            </div>
-            <ul class="header__lists">
-                <li><a href="/" class="link">Home</a></li>
-                <li><a href="/about/" class="link">About</a></li>
-                <li><a href="/services/" class="link">Services</a></li>
-                <li><a href="/booknow/" class="link">Book Now</a></li>
-                <li><a href="/socials/" class="link">Socials</a></li>
-            </ul>
+{% extends "base.html" %}
 
-    </header>
-    <main>
-        <h1 class="heading">Review your appointment</h1>
-        <p class="review__thankyou">Hi {{ first_name }}  {{ last_name }},<br><br>
+{% block content %}
+<section class="page-hero">
+    <div>
+        <p class="eyebrow eyebrow--light">Appointment review</p>
+        <h1>You are on the books.</h1>
+        <p>Review your detail summary below. A confirmation email is sent when email settings are configured.</p>
+    </div>
+</section>
 
-            Thank you for choosing Gnarly Bros Detailing! We'll be sending you an RSVP shortly or do so <a href={{rsvp}}>HERE</a>—please be sure to accept the invitation so we know you're a serious inquiry. <br><br>
+<section class="section section--cream review-layout">
+    <div class="review-copy reveal">
+        <h2>Thanks, {{ first_name }}.</h2>
+        <p>Our team will arrive at {{ address }}{% if apt %}, {{ apt }}{% endif %}, {{ city }}, {{ zip }} on {{ day }} at {{ time_label(time) }}.</p>
+        <p>Please be ready to meet us when we arrive. Appointments can take up to three hours depending on vehicle size, condition, and selected add-ons.</p>
+        <p>Once the service is complete, we will invite you to inspect the vehicle and make sure everything meets expectations.</p>
+        {% if rsvp %}
+        <a class="btn btn--ocean" href="{{ rsvp }}" target="_blank" rel="noopener">Open Calendar RSVP</a>
+        {% endif %}
+    </div>
 
-Our team will arrive at {{ address }}, {{ city }}, {{ zip }} at {{ time }}:00 on {{ day }}. Please be ready to meet us upon arrival. Appointments can take up to three hours, so we recommend planning your schedule accordingly.<br><br>
-
-Once the service is complete, we invite you to inspect the vehicle to ensure everything meets your expectations—we take great pride in client satisfaction.<br><br>
-
-If you have any questions before or during your appointment, don’t hesitate to reach out at 757-375-8368.<br><br>
-
-We look forward to serving you!<br><br>
-– The Gnarly Bros Detailing Team</p>
-        <div class="review__info">
-            <div class="review__firsthalf">
-                <div class="review__model">
-                    <span class="review__left">Car Model:</span>
-                    <span class="review__right">{{ model }}</span>
-                </div>
-                <div class="review__package">
-                    <span class="review__left">Package:</span>
-                    <span class="review__right"> {% if package == "Exterior_package" %} Exterior {% elif package == "Interior_package" %} Interior {% elif package == "Both_package" %} Detail {% endif %}</span>
-                </div>
-                <div class="review__packageprice">
-                    <span class="review__left">Package price:</span>
-                    <span class="review__right">${{ package_price }}</span>
-                </div>
-                {% for i in range(addons|length) %}
-                <div class="review__addons">
-                    <span class="review__left">{{addons[i] | replace("_", " ")}}:</span>
-                    <span class="review__right">${{addon_prices[i]}}</span>
-                </div>
-                {% endfor %}
-                <div class="review__price">
-                    <span class="review__left">Price:</span>
-                    <span class="review__right">${{ price }}</span>
-                </div>
-            </div>
+    <aside class="review-card reveal reveal--delay">
+        <p class="eyebrow">Summary</p>
+        <h2>{{ model }}</h2>
+        <div class="summary-row">
+            <span>Package</span>
+            <strong>{{ package_label(package) }}</strong>
         </div>
-
-    </main>
-    <footer>
-        <div class="footer__left">
-            <ul class="footer__list">
-                <li>Made by Kyrillos Abdelshaheed</li>
-                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
-                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
-                <li>757-375-8368</li>
-
-            </ul>
+        <div class="summary-row">
+            <span>Package price</span>
+            <strong>${{ package_price }}</strong>
         </div>
-        <div class="footer__right">
-            <ul class="footer__list">
-                <li><a href="/" class="footer__link">Home</a></li>
-                <li><a href="/about/" class="footer__link">About</a></li>
-                <li><a href="/services/" class="footer__link">Services</a></li>
-                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
-                <li><a href="/socials/" class="footer__link">Socials</a></li>
-
-            </ul>
+        {% if addons|length %}
+        {% for i in range(addons|length) %}
+        <div class="summary-row">
+            <span>{{ addons[i]|replace("_", " ") }}</span>
+            <strong>${{ addon_prices[i] }}</strong>
         </div>
-    </footer>
-</body>
-</html>
+        {% endfor %}
+        {% else %}
+        <div class="summary-row">
+            <span>Add-ons</span>
+            <strong>None</strong>
+        </div>
+        {% endif %}
+        <div class="summary-total">
+            <span>Total</span>
+            <strong>${{ price }}</strong>
+        </div>
+        <div class="review-contact">
+            <span>{{ email }}</span>
+            <span>{{ number }}</span>
+        </div>
+    </aside>
+</section>
+{% endblock %}

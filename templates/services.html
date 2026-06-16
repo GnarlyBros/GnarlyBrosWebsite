@@ -1,133 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Services</title>
-    <meta name="author" content="Kyrillos"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../static/css/styles.css"/>
-    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
-</head>
-<body>
-    <header>
-            <div>
-                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
-            </div>
-            <ul class="header__lists">
-                <li><a href="/" class="link">Home</a></li>
-                <li><a href="/about/" class="link">About</a></li>
-                <li><a href="/services/" class="link">Services</a></li>
-                <li><a href="/booknow/" class="link">Book Now</a></li>
-                <li><a href="/socials/" class="link">Socials</a></li>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <div>
+        <p class="eyebrow eyebrow--light">Services and pricing</p>
+        <h1>One full detail, priced clearly.</h1>
+        <p>We offer the Full Detail package only. Choose your vehicle size to see the backend-calculated rate used during booking.</p>
+    </div>
+</section>
+
+<section class="section section--cream">
+    <form action="{{ url_for('services') }}" method="POST" class="pricing-picker reveal">
+        <label for="models">Vehicle size</label>
+        <select name="model" id="models" onchange="this.form.submit()">
+            {% for vehicle in vehicle_models %}
+            <option value="{{ vehicle.value }}" {% if selected_model == vehicle.value %}selected{% endif %}>{{ vehicle.label }}</option>
+            {% endfor %}
+        </select>
+        <span>Showing prices for {{ selected_model|replace("LargeSUV", "Large SUV") }}</span>
+    </form>
+
+    <div class="pricing-grid pricing-grid--single">
+        <article class="price-card price-card--featured reveal reveal--delay">
+            <p class="card-kicker">Full service</p>
+            <h2>Full Detail</h2>
+            <div class="price">${{ both }}</div>
+            <ul>
+                <li>Complete interior detail</li>
+                <li>Deep vacuum and steam clean</li>
+                <li>Foam gun and pressure wash</li>
+                <li>Wheel clean and tire shine</li>
             </ul>
+            <a class="btn btn--sand" href="{{ url_for('booknow') }}">Book Full Detail</a>
+        </article>
+    </div>
+</section>
 
-    </header>
-    <main>
-        <h1 class="heading">SERVICES</h1>
-        <form action="/services" method="POST" class="services__form">
-            <label for="models" class="form__label">Choose your car model: </label>
-            <select name="model" id="models" onchange="this.form.submit()">
-                {% if selected_model == "Sedan"%}
-                <option value="Sedan" selected>Sedan</option>
-                {% else %}
-                <option value="Sedan">Sedan</option>
-                {% endif %}
-                {% if selected_model == "SUV"%}
-                <option value="SUV" selected>SUV</option>
-                {% else %}
-                <option value="SUV">SUV</option>
-                {% endif %}
-                {% if selected_model == "LargeSUV"%}
-                <option value="LargeSUV" selected>Large SUV (3rd Row)</option>
-                {% else %}
-                <option value="LargeSUV">Large SUV (3rd Row)</option>
-                {% endif %}
-                {% if selected_model == "Truck"%}
-                <option value="Truck" selected>Truck</option>
-                {% else %}
-                <option value="Truck">Truck</option>
-                {% endif %}
-                {% if selected_model == "Large Truck"%}
-                <option value="Large Truck" selected>Large Truck (With oversized wheels)</option>
-                {% else %}
-                <option value="Large Truck">Large Truck (With oversized wheels)</option>
-                {% endif %}
-            </select>
-        </form>
-        <div class="services__plans">
-            <div class="services__plan" id="both">
-                <h2 class="plan__heading">DETAIL</h2>
-                <ul class="services__list">
-                    <li>Steam Cleaning</li>
-                    <li>Deep Vacuuming</li>
-                    <li>Foam Gun & Pressure Wash</li>
-                    <li>Tire Shine</li>
-                    <li>Wheel Cleaning</li>
-                </ul>
-                <h1 class="services__price">${{ both }}</h1>
-            </div>
-        </div>
-        <h1 class="heading" id="addons">Add-Ons</h1>
-        <div class="services__plans">
-            <div class="services__plan">
-                <h2 class="plan__heading">CLAY BAR</h2>
-                <ul class="services__list">
-                    <li>Bonded Contaminants Removal</li>
-                    <li>Smoothness Restoral</li>
-                </ul>
-                <h1 class="services__price">${{claybar}}</h1>
-            </div>
-            <div class="services__plan">
-                <h2 class="plan__heading">CERAMIC SPRAY</h2>
-                <ul class="services__list">
-                    <li>Hydrophobic Protective Layer</li>
-                    <li>Gloss and Depth Enhancement</li>
-                </ul>
-                <h1 class="services__price">${{ceramic}}</h1>
-            </div>
-        </div>
+<section class="section">
+    <div class="section__header reveal">
+        <p class="eyebrow">Add-ons</p>
+        <h2>Dial in the detail.</h2>
+        <p>Add-ons are priced with the same vehicle selection and are added to the booking total automatically.</p>
+    </div>
+    <div class="addon-grid">
+        <article class="addon-card reveal">
+            <strong>${{ claybar }}</strong>
+            <h3>Clay Bar</h3>
+            <p>Bonded contaminant removal for a smoother finish.</p>
+        </article>
+        <article class="addon-card reveal reveal--delay">
+            <strong>${{ ceramic }}</strong>
+            <h3>Ceramic Spray</h3>
+            <p>Hydrophobic protection with added gloss and depth.</p>
+        </article>
+        <article class="addon-card reveal reveal--delay-2">
+            <strong>${{ polish }}</strong>
+            <h3>Polish</h3>
+            <p>Paint clarity improvement and light imperfection correction.</p>
+        </article>
+        <article class="addon-card reveal reveal--delay-2">
+            <strong>${{ carpet }}</strong>
+            <h3>Carpet Clean</h3>
+            <p>Deep clean for carpet dirt, stains, and odor.</p>
+        </article>
+    </div>
+    <p class="fine-print">Vehicles in severe condition may be subject to a $50-$100 up-charge.</p>
+</section>
 
-        <div class="services__plans">
-            <div class="services__plan">
-                <h2 class="plan__heading">SHAMPOO</h2>
-                <ul class="services__list">
-                    <li>Carpet Deep Clean</li>
-                    <li>Dirt, Stains and Oder Removal</li>
-                </ul>
-                <h1 class="services__price">${{carpet}}</h1>
-            </div>
-            <div class="services__plan">
-                <h2 class="plan__heading">Polish</h2>
-                <ul class="services__list">
-                    <li>Imperfection Removal</li>
-                    <li>Paint Clarity Restoral</li>
-                </ul>
-                <h1 class="services__price">${{polish}}</h1>
-            </div>
-        </div>
-        <p id="warning">*Vehicles in Severe condition may be subject to a $50-$100 up-charge.</p>
-        <button onclick="window.location.href='/booknow/'">Book Now</button>
-    </main>
-    <footer>
-        <div class="footer__left">
-            <ul class="footer__list">
-                <li>Made by Kyrillos Abdelshaheed</li>
-                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
-                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
-                <li>757-375-8368</li>
-
-            </ul>
-        </div>
-        <div class="footer__right">
-            <ul class="footer__list">
-                <li><a href="/" class="footer__link">Home</a></li>
-                <li><a href="/about/" class="footer__link">About</a></li>
-                <li><a href="/services/" class="footer__link">Services</a></li>
-                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
-                <li><a href="/socials/" class="footer__link">Socials</a></li>
-
-            </ul>
-        </div>
-    </footer>
-</body>
-</html>
+<section class="cta-band">
+    <div>
+        <p class="eyebrow eyebrow--light">Ready to book</p>
+        <h2>Select your vehicle, service, and add-ons in minutes.</h2>
+    </div>
+    <a class="btn btn--sand" href="{{ url_for('booknow') }}">Book Now</a>
+</section>
+{% endblock %}

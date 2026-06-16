@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="{{ business.developer }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title and title != business.name %}{{ title }} | {% endif %}{{ business.name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Gnarly_logo.png') }}">
+    <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+</head>
+<body data-page="{{ active_page|default('home') }}">
+    <nav class="site-nav" aria-label="Main navigation">
+        <a class="brand" href="{{ url_for('home') }}" aria-label="{{ business.name }} home">
+            <img src="{{ url_for('static', filename='Gnarly_logo.png') }}" alt="" class="brand__mark">
+            <span>{{ business.name }}</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-controls="site-menu" aria-expanded="false">
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+            <span class="nav-toggle__bar"></span>
+        </button>
+        <div class="site-menu" id="site-menu">
+            {% for link in nav_links %}
+            <a class="site-menu__link{% if active_page == link.endpoint %} is-active{% endif %}" href="{{ url_for(link.endpoint) }}">{{ link.label }}</a>
+            {% endfor %}
+            <a class="site-menu__cta" href="{{ url_for('booknow') }}">Book Detail</a>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div>
+                <a class="footer-brand" href="{{ url_for('home') }}">{{ business.name }}</a>
+                <p class="footer-copy">Mobile detailing across Hampton Roads, VA. We bring the wash, tools, and detail bay to you.</p>
+            </div>
+            <div class="footer-links">
+                {% for link in nav_links %}
+                <a href="{{ url_for(link.endpoint) }}">{{ link.label }}</a>
+                {% endfor %}
+            </div>
+            <div class="footer-contact">
+                <a href="tel:{{ business.phone|replace('-', '') }}">{{ business.phone }}</a>
+                <a href="mailto:{{ business.email }}">{{ business.email }}</a>
+                <span>Made by {{ business.developer }}</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

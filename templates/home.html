@@ -1,92 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gnarly Bros. Detailing</title>
-    <meta name="author" content="Kyrillos"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="static/css/styles.css"/>
-    <link rel="icon" type="image/png" href="static/Gnarly_logo.png"/>
-</head>
-<body>
-    <header>
-            <div>
-                <img src="static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
-            </div>
-            <ul class="header__lists">
-                <li><a href="/" class="link">Home</a></li>
-                <li><a href="/about/" class="link">About</a></li>
-                <li><a href="/services/" class="link">Services</a></li>
-                <li><a href="/booknow/" class="link">Book Now</a></li>
-                <li><a href="/socials/" class="link">Socials</a></li>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero hero--home" style="--hero-image: url('{{ url_for('static', filename='Bronco.png') }}');">
+    <div class="hero__content reveal">
+        <p class="eyebrow">Mobile auto detailing in Hampton Roads</p>
+        <h1>Gnarly Bros. Detailing</h1>
+        <p class="hero__text">A college-built mobile detail crew bringing interior, exterior, and full-detail service straight to your driveway.</p>
+        <div class="hero__actions">
+            <a class="btn btn--sand" href="{{ url_for('booknow') }}">Book a Detail</a>
+            <a class="btn btn--ghost" href="{{ url_for('services') }}">View Pricing</a>
+        </div>
+    </div>
+    <div class="hero__stats reveal reveal--delay">
+        <div class="stat">
+            <strong>Mobile</strong>
+            <span>We come to your home, job site, or fleet lot.</span>
+        </div>
+        <div class="stat">
+            <strong>Detail</strong>
+            <span>Interior, exterior, add-ons, and paint care.</span>
+        </div>
+        <a class="phone-pill" href="tel:{{ business.phone|replace('-', '') }}">{{ business.phone }}</a>
+    </div>
+</section>
+
+<section class="feature-strip" aria-label="Service highlights">
+    <div>
+        <strong>Driveway-ready</strong>
+        <span>Water, tools, products, and workflow handled by us.</span>
+    </div>
+    <div>
+        <strong>Clear pricing</strong>
+        <span>Vehicle-size pricing with add-ons shown before booking.</span>
+    </div>
+    <div>
+        <strong>Calendar flow</strong>
+        <span>Pick your day first, then choose from open time slots.</span>
+    </div>
+    <div>
+        <strong>Local crew</strong>
+        <span>Built by students from right here in Hampton Roads.</span>
+    </div>
+</section>
+
+<section class="section section--cream">
+    <div class="section__header reveal">
+        <p class="eyebrow">What we offer</p>
+        <h2>One complete detailing package.</h2>
+        <p>We keep the menu simple: every booking is a Full Detail that covers the interior and exterior in one mobile visit.</p>
+    </div>
+    <div class="service-grid service-grid--single">
+        <article class="service-card reveal">
+            <span class="card-kicker">01</span>
+            <h3>Full Detailing Package</h3>
+            <p>The complete everyday reset for your vehicle, built around interior care, exterior cleaning, and a finish you can feel good driving away in.</p>
+            <ul>
+                <li>Deep vacuum and steam clean</li>
+                <li>Interior surfaces and touch points</li>
+                <li>Foam gun and pressure wash</li>
+                <li>Wheel clean and tire shine</li>
+                <li>Add-ons available</li>
             </ul>
+        </article>
+    </div>
+</section>
 
-    </header>
-    <main>
-        <div class="why">
-            <div>
-                <h1 class="heading">WHY GNARLY BROS?</h1>
-            </div>
-            <div class="heading__body">
-                <div class="why__left">
-                    <p>
-                        We’re not just another car detailing service—we’re a team of hardworking college students from Suffolk, VA, who know the value of determination. We take pride in delivering top-tier results, restoring your vehicle to its factory-fresh condition with precision and care. At Gnarly Bros, we bring the shine to your doorstep or wherever you need us—whether that’s your home, job site, or any other location. Our mobile detailing services ensure ultimate convenience without sacrificing quality. No need to take time out of your busy day or travel to a shop—we come to you, fully equipped and ready to deliver exceptional results wherever you are. More than just a clean car, we offer a customer-first experience that blends quality workmanship with outstanding service. From meticulous hand washes to deep interior cleaning, we go above and beyond to make sure your vehicle gets the attention it deserves—every single time. Trust Gnarly Bros to provide an unbeatable level of care and convenience. We’re committed to transforming your ride and making your detailing experience as easy and satisfying as possible. Let us bring out the best in your car, no matter where you are.
-                    </p>
-                    <button onclick="window.location.href='/about/'">More</button>
-                </div>
-                <img src="static/Bronco.png" alt="Clean Bronco" class="why__image"/>
-            </div>
-        </div>
-        <div class="services">
-            <h1 class="heading">SERVICES</h1>
-            <div class="services__body">
-                <div class="services__left">
-                    <h2 class="heading">INTERIOR</h2>
-                    <ul class="services__listhome">
-                        <li>Complete Interior Detailing</li>
-                        <li>Stain Removal</li>
-                        <li>Steam Cleaning</li>
-                        <li>Deep Vacuuming</li>
-                    </ul>
-                </div>
-                <div class="services__right">
-                    <h2 class="heading">EXTERIOR</h2>
-                    <ul class="services__listhome">
-                        <li>Foam Gun & Pressure Wash</li>
-                        <li>Tire Shine</li>
-                        <li>Wheel Cleaning</li>
-                    </ul>
-                </div>
-            </div>
-            <button onclick="window.location.href='/services/'">See Pricing</button>
-            </div>
-            <div class="Book">
-                <h1 class="heading">SEE OUR AVAILABILITY!</h1>
-                <button onclick="window.location.href='/booknow/'">Book Now</button>
-            </div>
+<section class="section section--cream">
+    <div class="split-copy reveal">
+        <p class="eyebrow">Why Gnarly Bros.</p>
+        <h2>Small crew energy, professional finish.</h2>
+        <p>We are not a franchise or a call center. We are a hands-on local crew that built this around convenience, communication, and pride in the final pass.</p>
+        <a class="btn btn--ocean" href="{{ url_for('about') }}">Meet the Team</a>
+    </div>
+</section>
 
-        </div>
-    </main>
-    <footer>
-        <div class="footer__left">
-            <ul class="footer__list">
-                <li>Made by Kyrillos Abdelshaheed</li>
-                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
-                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
-                <li>757-375-8368</li>
-
-            </ul>
-        </div>
-        <div class="footer__right">
-            <ul class="footer__list">
-                <li><a href="/" class="footer__link">Home</a></li>
-                <li><a href="/about/" class="footer__link">About</a></li>
-                <li><a href="/services/" class="footer__link">Services</a></li>
-                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
-                <li><a href="/socials/" class="footer__link">Socials</a></li>
-
-            </ul>
-        </div>
-    </footer>
-</body>
-</html>
+<section class="cta-band">
+    <div>
+        <p class="eyebrow eyebrow--light">Ready when you are</p>
+        <h2>Book the detail. We will bring the bay.</h2>
+    </div>
+    <a class="btn btn--sand" href="{{ url_for('booknow') }}">Start Booking</a>
+</section>
+{% endblock %}

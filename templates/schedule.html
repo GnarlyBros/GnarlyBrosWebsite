@@ -1,70 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Book Now</title>
-    <meta name="author" content="Kyrillos"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../static/css/styles.css"/>
-    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
-</head>
-<body>
-    <header>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <div>
+        <p class="eyebrow eyebrow--light">Choose a time</p>
+        <h1>Lock in your appointment slot.</h1>
+        <p>We checked your selected date against current bookings. Pick an open time to continue.</p>
+    </div>
+</section>
+
+<section class="section section--cream narrow-section">
+    {% if day == "invalid" %}
+    <div class="state-panel reveal">
+        <h2>That date is not available.</h2>
+        <p>Please go back and choose a future date so the backend can check open time slots.</p>
+        <a class="btn btn--ocean" href="{{ url_for('booknow') }}">Choose Another Date</a>
+    </div>
+    {% elif times|length == 0 %}
+    <div class="state-panel reveal">
+        <h2>No open times for {{ day }}.</h2>
+        <p>This day is fully booked. Pick another day and we will check availability again.</p>
+        <a class="btn btn--ocean" href="{{ url_for('booknow') }}">Choose Another Date</a>
+    </div>
+    {% else %}
+    <form action="{{ url_for('schedule', entry_id=entry_id) }}" method="POST" class="time-form reveal">
+        <div class="form-panel__header">
+            <span>05</span>
             <div>
-                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
+                <h2>Available on {{ day }}</h2>
+                <p>Only open backend time slots are shown here.</p>
             </div>
-            <ul class="header__lists">
-                <li><a href="/" class="link">Home</a></li>
-                <li><a href="/about/" class="link">About</a></li>
-                <li><a href="/services/" class="link">Services</a></li>
-                <li><a href="/booknow/" class="link">Book Now</a></li>
-                <li><a href="/socials/" class="link">Socials</a></li>
-            </ul>
-
-    </header>
-    <main>
-        {% if day == "invalid" %}
-        <h1 class="heading">You choose an invalid day. Please go back and pick a valid day.</h1>
-        <div class="placeholder"></div>
-        {% elif times|length == 0 %}
-        <h1 class="heading">No open times for this day. Please go back and try again.</h1>
-        <div class="placeholder"></div>
-        {% else %}
-        <h1 class="heading">Choose a time</h1>
-        <form action="/schedule/?entry_id={{ entry_id }}" method="POST">
-            <div class="booknow__time">
-                    <label for="time" class="form__label">Time:</label>
-                    <select id="time" name="time">
-                        {% for time in times %}
-                        <option value="{{ time }}">{{ time }}:00</option>
-                        {% endfor %}
-                    </select>
-            </div>
-            <button type="submit">Review</button>
-            <div class="placeholder"></div>
-        </form>
-        {% endif %}
-    </main>
-    <footer>
-        <div class="footer__left">
-            <ul class="footer__list">
-                <li>Made by Kyrillos Abdelshaheed</li>
-                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
-                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
-                <li>757-375-8368</li>
-
-            </ul>
         </div>
-        <div class="footer__right">
-            <ul class="footer__list">
-                <li><a href="/" class="footer__link">Home</a></li>
-                <li><a href="/about/" class="footer__link">About</a></li>
-                <li><a href="/services/" class="footer__link">Services</a></li>
-                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
-                <li><a href="/socials/" class="footer__link">Socials</a></li>
-
-            </ul>
+        <div class="time-grid">
+            {% for time in times %}
+            <label class="time-card">
+                <input type="radio" name="time" value="{{ time }}" {% if loop.first %}checked{% endif %}>
+                <span>{{ time_label(time) }}</span>
+            </label>
+            {% endfor %}
         </div>
-    </footer>
-</body>
-</html>
+        <button class="btn btn--sand" type="submit">Review Appointment</button>
+    </form>
+    {% endif %}
+</section>
+{% endblock %}

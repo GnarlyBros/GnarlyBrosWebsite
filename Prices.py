@@ -1,4 +1,10 @@
 class Prices:
+    """Vehicle-size based price table.
+
+    Kept as a class so your existing imports and backend calls keep working:
+        prices = Prices.Prices(model)
+        interior_price, exterior_price, both, claybar, ceramic, polish, carpet = prices.get_price()
+    """
 
     def __init__(self, model):
         self.model = model
@@ -38,8 +44,3 @@ class Prices:
             self.carpet = 100
 
         return self.interior, self.exterior, self.both, self.claybar, self.ceramic, self.polish, self.carpet
-
-
-
-
-

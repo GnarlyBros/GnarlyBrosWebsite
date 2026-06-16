@@ -1,74 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About</title>
-    <meta name="author" content="Kyrillos"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../static/css/styles.css"/>
-    <link rel="icon" type="image/png" href="../static/Gnarly_logo.png"/>
-</head>
-<body>
-    <header>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <div>
+        <p class="eyebrow eyebrow--light">Our story</p>
+        <h1>Built on hustle, rooted in Hampton Roads.</h1>
+        <p>Gnarly Bros. is a mobile detailing team built by college students who care about clean work, clear communication, and making the process easy.</p>
+    </div>
+</section>
+
+<section class="section section--split">
+    <div class="split-copy reveal">
+        <p class="eyebrow">Why us</p>
+        <h2>We bring the detail bay to your driveway.</h2>
+        <p>We take pride in restoring vehicles with precision and care, whether we are meeting you at home, at work, or wherever your schedule makes the most sense.</p>
+        <p>Our work is mobile by design: no shop trip, no lost afternoon, and no guessing about what is happening next.</p>
+    </div>
+    <div class="image-panel reveal reveal--delay">
+        <img src="{{ url_for('static', filename='B4L.png') }}" alt="Gnarly Bros. founders">
+    </div>
+</section>
+
+<section class="section section--cream">
+    <div class="section__header reveal">
+        <p class="eyebrow">Meet the crew</p>
+        <h2>The people behind the polish.</h2>
+    </div>
+    <div class="team-grid">
+        <article class="team-card reveal">
+            <img src="{{ url_for('static', filename='Brax.png') }}" alt="Braxton from Gnarly Bros.">
             <div>
-                <img src="../static/Gnarly_logo.png" alt="The Gnarly Bros. Logo" class="header__logo"/>
+                <h3>Braxton</h3>
+                <p>A VMI wrestler and civil engineering major who brings discipline, grit, and years of detailing experience to the work.</p>
             </div>
-            <ul class="header__lists">
-                <li><a href="/" class="link">Home</a></li>
-                <li><a href="/about/" class="link">About</a></li>
-                <li><a href="/services/" class="link">Services</a></li>
-                <li><a href="/booknow/" class="link">Book Now</a></li>
-                <li><a href="/socials/" class="link">Socials</a></li>
-            </ul>
+        </article>
+        <article class="team-card reveal reveal--delay">
+            <img src="{{ url_for('static', filename='Cooney.png') }}" alt="Jason from Gnarly Bros.">
+            <div>
+                <h3>Jason</h3>
+                <p>A CNU electrical engineering student whose problem-solving mindset shows up in the care and consistency of every detail.</p>
+            </div>
+        </article>
+        <article class="team-card reveal reveal--delay-2">
+            <img src="{{ url_for('static', filename='Rillos.png') }}" alt="Kyrillos from Gnarly Bros.">
+            <div>
+                <h3>Kyrillos</h3>
+                <p>A CNU computer science student who blends technical focus, customer care, and the entrepreneurial drive behind the website.</p>
+            </div>
+        </article>
+    </div>
+</section>
 
-    </header>
-    <main>
-        <h1 class="heading">ABOUT</h1>
-        <div class="about">
-            <p>
-               We’re not just another car detailing service—we’re a team of hardworking college students from Suffolk, VA, who know the value of determination. We take pride in delivering top-tier results, restoring your vehicle to its factory-fresh condition with precision and care. At Gnarly Bros, we bring the shine to your doorstep or wherever you need us—whether that’s your home, job site, or any other location. Our mobile detailing services ensure ultimate convenience without sacrificing quality. No need to take time out of your busy day or travel to a shop—we come to you, fully equipped and ready to deliver exceptional results wherever you are. More than just a clean car, we offer a customer-first experience that blends quality workmanship with outstanding service. From meticulous hand washes to deep interior cleaning, we go above and beyond to make sure your vehicle gets the attention it deserves—every single time. Trust Gnarly Bros to provide an unbeatable level of care and convenience. We’re committed to transforming your ride and making your detailing experience as easy and satisfying as possible. Let us bring out the best in your car, no matter where you are.
-            </p>
-            <img src="../static/B4L.png" alt="Picture of Gnarly Bros. founders" class="image__lefthalf"/>
-        </div>
-        <div class="about">
-            <img src="../static/Brax.png" alt="Picture of Gnarly Bros. founders" class="image__righthalf"/>
-            <p>
-                Meet Braxton, a mobile detailing business owner who's not only dedicated to keeping cars spotless but also a star player on the Virginia Military Institute wrestling team. As a civil engineering major, Braxton balances the rigors of his coursework with the demands of wrestling and running his detailing company. His extensive background in detailing, built through years of meticulous work and hands-on experience, has made him a trusted name in the local community. Whether he's grappling on the mat or fine-tuning a vehicle to perfection, Braxton brings the same level of discipline and determination to everything he does.
-            </p>
-        </div>
-        <div class="about">
-            <p>
-                Jason is a dedicated student at Christopher Newport University, juggling the challenges of being an electrical engineering major with his active involvement in club soccer and tennis. In addition to his academic and athletic commitments, he also runs his own mobile detailing business, showcasing his entrepreneurial spirit and attention to detail. Jason’s knack for problem-solving and his love for teamwork shine through in everything he does—whether it’s fine-tuning circuits, strategizing on the field, or perfecting a car’s finish. His commitment to excellence in all aspects of life makes him a true standout among his peers.
-            </p>
-            <img src="../static/Cooney.png" alt="Picture of Gnarly Bros. founders" class="image__lefthalf"/>
-        </div>
-        <div class="about">
-            <img src="../static/Rillos.png" alt="Picture of Gnarly Bros. founders" class="image__righthalf"/>
-            <p>
-                Kyrillos is a driven computer science major at Christopher Newport University, where he's an active member of the Pi Kappa Alpha fraternity. Alongside his academic and fraternity commitments, he runs a mobile detailing business, blending his entrepreneurial mindset with his passion for technology and precision. Kyrillos also created this very website, showcasing his skills and innovative thinking. Balancing the demands of school, fraternity life, and his detailing company, Kyrillos thrives in every aspect of his college experience. His ability to merge technical expertise with a collaborative mindset makes him a standout among his peers, and he’s always ready to tackle the next challenge head-on.
-            </p>
-        </div>
-    </main>
-    <footer>
-        <div class="footer__left">
-            <ul class="footer__list">
-                <li>Made by Kyrillos Abdelshaheed</li>
-                <li><a href="https://www.instagram.com/gnarlybrosdetailing?igsh=cm5tYjFib210MmJi&utm_source=qr" class="footer__link">Instagram</a></li>
-                <li><a href="https://www.facebook.com/share/15Pkiirc8b/?mibextid==wwXlfr" class="footer__link">Facebook</a></li>
-                <li>757-375-8368</li>
-
-            </ul>
-        </div>
-        <div class="footer__right">
-            <ul class="footer__list">
-                <li><a href="/" class="footer__link">Home</a></li>
-                <li><a href="/about/" class="footer__link">About</a></li>
-                <li><a href="/services/" class="footer__link">Services</a></li>
-                <li><a href="/booknow/" class="footer__link">Book Now</a></li>
-                <li><a href="/socials/" class="footer__link">Socials</a></li>
-
-            </ul>
-        </div>
-    </footer>
-</body>
-</html>
+<section class="cta-band">
+    <div>
+        <p class="eyebrow eyebrow--light">Let us handle it</p>
+        <h2>Pick a service and we will come to you.</h2>
+    </div>
+    <a class="btn btn--sand" href="{{ url_for('booknow') }}">Book Now</a>
+</section>
+{% endblock %}
